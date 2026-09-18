@@ -1,0 +1,16 @@
+{
+  "platform": "Linux-7.2.5-3-omarchy-x86_64-with-glibc2.44",
+  "processor": "",
+  "binary_sha256": "35f787b014c834ba0d9a969b1570586506568609b8b8bde084e57576a0e96bb7",
+  "source_sha256": "0c9db0b722b99fa4879713d4323808be9feeadd7ddd29f71ddb61e7842b5506a",
+  "peak_child_rss_kib": 21280,
+  "files": 1000,
+  "bytes": 106954000,
+  "lines": 1009000,
+  "warmups": 5,
+  "runs": 30,
+  "median_seconds": 5.289903070000946,
+  "p95_seconds": 5.326867712999956,
+  "binary_bytes": 5880120,
+  "cache": "warm; cold cache unverified"
+}

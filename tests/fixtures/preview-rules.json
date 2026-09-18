@@ -1,0 +1,1760 @@
+[
+  {
+    "rule": "S003",
+    "name": "cuda",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.tolist()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 15
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "cpu",
+    "source": "import torch\nx = torch.ones(2, device='cpu')\nfor i in range(3):\n    x.tolist()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "unknown_object",
+    "source": "for i in range(3):\n    x.tolist()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "outside",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nx.tolist()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "annotation",
+    "source": "import torch\ndef f(x: torch.Tensor):\n    for i in range(3):\n        x.tolist()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 9
+        },
+        "end": {
+          "line": 4,
+          "column": 19
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "alias",
+    "source": "import torch as t\nx = t.ones(2, device='cuda')\nfor i in range(3):\n    x.tolist()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 15
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "comprehension",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nvalues = [x.tolist() for i in range(3)]\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 11
+        },
+        "end": {
+          "line": 3,
+          "column": 21
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "deferred",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    callback = lambda: x.tolist()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "nested",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    for j in range(2):\n        x.tolist()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 9
+        },
+        "end": {
+          "line": 5,
+          "column": 19
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "shadow_tensor",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x = other\n    x.tolist()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "while_test",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nwhile x.tolist():\n    pass\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 7
+        },
+        "end": {
+          "line": 3,
+          "column": 17
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "iterable",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in x.tolist():\n    pass\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "cuda",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    float(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 13
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "cpu",
+    "source": "import torch\nx = torch.ones(2, device='cpu')\nfor i in range(3):\n    float(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "unknown_object",
+    "source": "for i in range(3):\n    float(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "outside",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfloat(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "annotation",
+    "source": "import torch\ndef f(x: torch.Tensor):\n    for i in range(3):\n        float(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 9
+        },
+        "end": {
+          "line": 4,
+          "column": 17
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "alias",
+    "source": "import torch as t\nx = t.ones(2, device='cuda')\nfor i in range(3):\n    float(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 13
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "comprehension",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nvalues = [float(x) for i in range(3)]\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 11
+        },
+        "end": {
+          "line": 3,
+          "column": 19
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "deferred",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    callback = lambda: float(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "nested",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    for j in range(2):\n        float(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 9
+        },
+        "end": {
+          "line": 5,
+          "column": 17
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "shadow_tensor",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x = other\n    float(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "while_test",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nwhile float(x):\n    pass\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 7
+        },
+        "end": {
+          "line": 3,
+          "column": 15
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "iterable",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in float(x):\n    pass\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "cuda",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.nonzero()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 16
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "cpu",
+    "source": "import torch\nx = torch.ones(2, device='cpu')\nfor i in range(3):\n    x.nonzero()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "unknown_object",
+    "source": "for i in range(3):\n    x.nonzero()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "outside",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nx.nonzero()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "annotation",
+    "source": "import torch\ndef f(x: torch.Tensor):\n    for i in range(3):\n        x.nonzero()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "alias",
+    "source": "import torch as t\nx = t.ones(2, device='cuda')\nfor i in range(3):\n    x.nonzero()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 16
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "comprehension",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nvalues = [x.nonzero() for i in range(3)]\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 11
+        },
+        "end": {
+          "line": 3,
+          "column": 22
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "deferred",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    callback = lambda: x.nonzero()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "nested",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    for j in range(2):\n        x.nonzero()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 9
+        },
+        "end": {
+          "line": 5,
+          "column": 20
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "shadow_tensor",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x = other\n    x.nonzero()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "while_test",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nwhile x.nonzero():\n    pass\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 7
+        },
+        "end": {
+          "line": 3,
+          "column": 18
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "iterable",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in x.nonzero():\n    pass\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "bad_arg",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.tolist(1)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "kwargs",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.tolist(**options)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S003",
+    "name": "unknown_device",
+    "source": "import torch\nx = torch.ones(2)\nfor i in range(3):\n    x.tolist()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 15
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "bool",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    bool(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 12
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "int",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    int(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 11
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "local_shadow",
+    "source": "import torch\ndef f(x: torch.Tensor):\n    for i in range(3):\n        float(x)\n    float = custom\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "parameter_shadow",
+    "source": "import torch\ndef f(float, x: torch.Tensor):\n    for i in range(3):\n        float(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "star_import",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfrom arbitrary import *\nfor i in range(3):\n    float(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "extra_argument",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    int(x, 16)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S004",
+    "name": "keyword",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    float(x=x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "functional",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.nonzero(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 21
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "keyword",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.nonzero(input=x, as_tuple=True)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "alias_function",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfrom torch import nonzero as nz\nfor i in range(3):\n    nz(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 5
+        },
+        "end": {
+          "line": 5,
+          "column": 10
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "duplicate_input",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.nonzero(x, input=x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "unknown_tuple",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.nonzero(as_tuple=flag)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "unpack",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.nonzero(*inputs)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "S005",
+    "name": "method_positional",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.nonzero(True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "cuda",
+    "source": "import torch\nfor i in range(3):\n    torch.cuda.empty_cache()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 5
+        },
+        "end": {
+          "line": 3,
+          "column": 29
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "memory",
+    "source": "import torch\nfor i in range(3):\n    torch.cuda.memory.empty_cache()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 5
+        },
+        "end": {
+          "line": 3,
+          "column": 36
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "alias",
+    "source": "import torch as t\nfor i in range(3):\n    t.cuda.empty_cache()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 5
+        },
+        "end": {
+          "line": 3,
+          "column": 25
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "from",
+    "source": "from torch.cuda import empty_cache as clear\nfor i in range(3):\n    clear()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 5
+        },
+        "end": {
+          "line": 3,
+          "column": 12
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "outside",
+    "source": "import torch\ntorch.cuda.empty_cache()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "fake",
+    "source": "for i in range(3):\n    cache.empty_cache()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "argument",
+    "source": "import torch\nfor i in range(3):\n    torch.cuda.empty_cache(0)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "kwargs",
+    "source": "import torch\nfor i in range(3):\n    torch.cuda.empty_cache(**options)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "shadow",
+    "source": "import torch\ndef f(torch):\n    for i in range(3):\n        torch.cuda.empty_cache()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "deferred",
+    "source": "import torch\nfor i in range(3):\n    def later():\n        torch.cuda.empty_cache()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "comprehension",
+    "source": "import torch\na = [torch.cuda.empty_cache() for i in range(3)]\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 6
+        },
+        "end": {
+          "line": 2,
+          "column": 30
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M001",
+    "name": "reassigned",
+    "source": "import torch\nfor i in range(3):\n    torch = custom\n    torch.cuda.empty_cache()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "tensor",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.tensor(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 20
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "cpu",
+    "source": "import torch\nx = torch.ones(2, device='cpu')\nfor i in range(3):\n    torch.tensor(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 20
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "list",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.tensor([1, 2])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "unknown",
+    "source": "import torch\nfor i in range(3):\n    torch.tensor(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "outside",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\ntorch.tensor(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "alias",
+    "source": "import torch as t\nx = t.ones(2, device='cuda')\nfor i in range(3):\n    t.tensor(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 16
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "annotation",
+    "source": "import torch\ndef f(x: torch.Tensor):\n    for i in range(3):\n        torch.tensor(x)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 9
+        },
+        "end": {
+          "line": 4,
+          "column": 24
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "keyword",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.tensor(data=x, requires_grad=True)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 45
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "copy_dtype",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.tensor(x, dtype=torch.float32)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 41
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "collision",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.tensor(x, data=x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "unpack",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.tensor(x, **options)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "shadow",
+    "source": "import torch\ndef f(torch, x):\n    for i in range(3):\n        torch.tensor(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "as_tensor",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.as_tensor(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M002",
+    "name": "fake_method",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    other.tensor(x)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "accumulator",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat([acc, part])\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 11
+        },
+        "end": {
+          "line": 5,
+          "column": 33
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "tuple",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat((acc, part))\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 11
+        },
+        "end": {
+          "line": 5,
+          "column": 33
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "dim",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat([acc, part], dim=0)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 11
+        },
+        "end": {
+          "line": 5,
+          "column": 40
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "alias",
+    "source": "import torch as t\nacc = t.empty(0, device='cuda')\npart = t.ones(2, device='cuda')\nfor i in range(3):\n    acc = t.cat([acc, part])\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 11
+        },
+        "end": {
+          "line": 5,
+          "column": 29
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "reset",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.empty(0)\n    acc = torch.cat([acc, part])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "escape",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat([acc, part])\n    consume(acc)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "outside",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nacc = torch.cat([acc, part])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "unknown",
+    "source": "import torch\nacc = arbitrary()\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat([acc, part])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "branch",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    if flag:\n        acc = torch.cat([acc, part])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "name_alias",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nalias = acc\nfor i in range(3):\n    acc = torch.cat([acc, part])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "prior_escape",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nconsume(acc)\nfor i in range(3):\n    acc = torch.cat([acc, part])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "other_assignment",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat([part, part])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "out",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat([acc, part], out=acc)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "namespace_shadow",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor torch in range(3):\n    acc = torch.cat([acc, part])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "callee_reassigned",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat([acc, part])\n    torch = other\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "keyword",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat(tensors=[acc, part])\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 11
+        },
+        "end": {
+          "line": 5,
+          "column": 41
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "M003",
+    "name": "side_effect",
+    "source": "import torch\nacc = torch.empty(0, device='cuda')\npart = torch.ones(2, device='cuda')\nfor i in range(3):\n    acc = torch.cat([acc, mutate(acc)])\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "backward",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(retain_graph=True)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 34
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "annotation",
+    "source": "import torch\ndef f(x: torch.Tensor):\n    for i in range(3):\n        x.backward(retain_graph=True)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 9
+        },
+        "end": {
+          "line": 4,
+          "column": 38
+        }
+      }
+    ],
+    "confidence": "medium",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "outside",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nx.backward(retain_graph=True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "false",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(retain_graph=False)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "dynamic",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(retain_graph=flag)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "higher_order",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(retain_graph=True, create_graph=True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "unknown_create",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(retain_graph=True, create_graph=flag)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "explicit_false",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(retain_graph=True, create_graph=False)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 54
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "functional",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.autograd.backward(x, retain_graph=True)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 50
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "grad",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.autograd.grad(x, x, retain_graph=True)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 49
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "positional",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(None, True, False)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 34
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "kwargs",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(retain_graph=True, **options)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "fake",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    obj.backward(retain_graph=True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "collision",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    x.backward(None, True, retain_graph=True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "missing_inputs",
+    "source": "import torch\nx = torch.ones(2, device='cuda')\nfor i in range(3):\n    torch.autograd.grad(x, retain_graph=True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A001",
+    "name": "shadow",
+    "source": "import torch\ndef f(torch):\n    for i in range(3):\n        torch.autograd.backward(x, retain_graph=True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "context",
+    "source": "import torch\nwith torch.autograd.detect_anomaly():\n    work()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 6
+        },
+        "end": {
+          "line": 2,
+          "column": 37
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "direct",
+    "source": "import torch\ntorch.autograd.detect_anomaly()\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 1
+        },
+        "end": {
+          "line": 2,
+          "column": 32
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "setting",
+    "source": "import torch\ntorch.autograd.set_detect_anomaly(True)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 1
+        },
+        "end": {
+          "line": 2,
+          "column": 40
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "keyword",
+    "source": "import torch\ntorch.autograd.set_detect_anomaly(mode=True)\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 1
+        },
+        "end": {
+          "line": 2,
+          "column": 45
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "disabled",
+    "source": "import torch\ntorch.autograd.set_detect_anomaly(False)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "dynamic",
+    "source": "import torch\ntorch.autograd.set_detect_anomaly(flag)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "alias",
+    "source": "from torch.autograd import detect_anomaly as detect\nwith detect():\n    pass\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 6
+        },
+        "end": {
+          "line": 2,
+          "column": 14
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "check_nan_false",
+    "source": "import torch\nwith torch.autograd.detect_anomaly(check_nan=False):\n    pass\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 6
+        },
+        "end": {
+          "line": 2,
+          "column": 52
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "unpack",
+    "source": "import torch\ntorch.autograd.detect_anomaly(**options)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "shadow",
+    "source": "import torch\ndef f(torch):\n    torch.autograd.detect_anomaly()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "fake",
+    "source": "obj.detect_anomaly()\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "bad_argument",
+    "source": "import torch\ntorch.autograd.detect_anomaly(mode=True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "nested_once",
+    "source": "import torch\nfor i in range(3):\n    with torch.autograd.detect_anomaly():\n        pass\n",
+    "count": 1,
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 10
+        },
+        "end": {
+          "line": 3,
+          "column": 41
+        }
+      }
+    ],
+    "confidence": "high",
+    "severity": "medium"
+  },
+  {
+    "rule": "A002",
+    "name": "collision",
+    "source": "import torch\ntorch.autograd.set_detect_anomaly(True, mode=True)\n",
+    "count": 0,
+    "locations": [],
+    "confidence": "high",
+    "severity": "medium"
+  }
+]

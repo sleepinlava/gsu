@@ -1,0 +1,1441 @@
+[
+  {
+    "rule": "T001",
+    "name": "cpu_cuda",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nfor i in range(2):\n y=x.cuda()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 12
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T001",
+    "name": "cuda_cpu",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\nfor i in range(2):\n y=x.cpu()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 11
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T001",
+    "name": "cross_card",
+    "source": "import torch\nx=torch.ones(1,device='cuda:0')\nfor i in range(2):\n y=x.to('cuda:1')\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 18
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T001",
+    "name": "same_cpu",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nfor i in range(2):\n y=x.cpu()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "T001",
+    "name": "same_card",
+    "source": "import torch\nx=torch.ones(1,device='cuda:0')\nfor i in range(2):\n y=x.to('cuda:0')\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "T001",
+    "name": "dtype_only",
+    "source": "import torch\nx=torch.ones(1)\nfor i in range(2):\n y=x.to(torch.float64)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "T001",
+    "name": "nonblocking",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nfor i in range(2):\n y=x.to('cuda',non_blocking=True)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 34
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T001",
+    "name": "annotation",
+    "source": "import torch\ndef f(x:torch.Tensor):\n for i in range(2):\n  y=x.cuda()\n",
+    "count": 1,
+    "confidence": "medium",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 5
+        },
+        "end": {
+          "line": 4,
+          "column": 13
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T001",
+    "name": "unknown",
+    "source": "import torch\nfor i in range(2):\n y=x.cuda()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "T001",
+    "name": "while_condition",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nwhile x.cuda():\n pass\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 7
+        },
+        "end": {
+          "line": 3,
+          "column": 15
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T001",
+    "name": "iterable",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nfor i in x.cuda():\n pass\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "T001",
+    "name": "outside",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "T002",
+    "name": "chain",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda().cpu()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "high",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 3
+        },
+        "end": {
+          "line": 3,
+          "column": 17
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T002",
+    "name": "reverse",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nx=torch.ones(1,device='cuda:0')\ny=x.cpu().to('cuda:0')\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "high",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 3
+        },
+        "end": {
+          "line": 4,
+          "column": 23
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T002",
+    "name": "assignment",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda()\nz=y.cpu()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "high",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 3
+        },
+        "end": {
+          "line": 4,
+          "column": 10
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T002",
+    "name": "alias",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda()\na=y\nz=a.cpu()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "high",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 3
+        },
+        "end": {
+          "line": 5,
+          "column": 10
+        }
+      }
+    ]
+  },
+  {
+    "rule": "T002",
+    "name": "oneway",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "high",
+    "locations": []
+  },
+  {
+    "rule": "T002",
+    "name": "other_tensor",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda()\nz=torch.ones(2).cpu()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "high",
+    "locations": []
+  },
+  {
+    "rule": "T002",
+    "name": "reassign",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda()\ny=other\nz=y.cpu()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "high",
+    "locations": []
+  },
+  {
+    "rule": "T002",
+    "name": "consume",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda()\nconsume(y)\nz=y.cpu()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "high",
+    "locations": []
+  },
+  {
+    "rule": "T002",
+    "name": "branch",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda()\nif flag:\n z=y.cpu()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "high",
+    "locations": []
+  },
+  {
+    "rule": "T002",
+    "name": "different_index",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nx=torch.ones(1,device='cuda:0')\ny=x.cpu().to('cuda:1')\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "high",
+    "locations": []
+  },
+  {
+    "rule": "T002",
+    "name": "unknown_start",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nx=torch.ones(1)\ny=x.cuda().cpu()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "high",
+    "locations": []
+  },
+  {
+    "rule": "T002",
+    "name": "three_casts",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda().cpu().cuda()\n",
+    "count": 2,
+    "confidence": "high",
+    "severity": "high",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 3
+        },
+        "end": {
+          "line": 3,
+          "column": 17
+        }
+      },
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 3
+        },
+        "end": {
+          "line": 3,
+          "column": 24
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S001",
+    "name": "cuda",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\nfor i in range(2):\n x.item()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 2
+        },
+        "end": {
+          "line": 4,
+          "column": 10
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S001",
+    "name": "cpu",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nfor i in range(2):\n x.item()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S001",
+    "name": "unknown_device",
+    "source": "import torch\nx=torch.ones(1)\nfor i in range(2):\n x.item()\n",
+    "count": 1,
+    "confidence": "medium",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 2
+        },
+        "end": {
+          "line": 4,
+          "column": 10
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S001",
+    "name": "annotation",
+    "source": "import torch\ndef f(x:torch.Tensor):\n for i in range(2):\n  x.item()\n",
+    "count": 1,
+    "confidence": "medium",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 3
+        },
+        "end": {
+          "line": 4,
+          "column": 11
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S001",
+    "name": "fake",
+    "source": "import torch\nfor i in range(2):\n thing.item()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S001",
+    "name": "nested",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\nfor i in range(2):\n for j in range(2):\n  x.item()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 3
+        },
+        "end": {
+          "line": 5,
+          "column": 11
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S001",
+    "name": "conditional",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\nfor i in range(2):\n if log:\n  x.item()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 5,
+          "column": 3
+        },
+        "end": {
+          "line": 5,
+          "column": 11
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S001",
+    "name": "outside",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\nx.item()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S001",
+    "name": "lambda",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\nfor i in range(2):\n f=lambda: x.item()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S001",
+    "name": "arguments",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\nfor i in range(2):\n x.item(1)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S001",
+    "name": "keyword",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\nfor i in range(2):\n x.item(a=1)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S001",
+    "name": "comprehension",
+    "source": "import torch\nx=torch.ones(1,device='cuda')\ny=[x.item() for i in range(2)]\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 4
+        },
+        "end": {
+          "line": 3,
+          "column": 12
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S002",
+    "name": "full",
+    "source": "import torch\ntorch.cuda.synchronize()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 1
+        },
+        "end": {
+          "line": 2,
+          "column": 25
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S002",
+    "name": "alias",
+    "source": "import torch\nimport torch as t\nt.cuda.synchronize()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "line": 3,
+          "column": 21
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S002",
+    "name": "from",
+    "source": "import torch\nfrom torch.cuda import synchronize as sync\nsync()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "line": 3,
+          "column": 7
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S002",
+    "name": "device",
+    "source": "import torch\ntorch.cuda.synchronize(device='cuda:0')\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 1
+        },
+        "end": {
+          "line": 2,
+          "column": 40
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S002",
+    "name": "loop",
+    "source": "import torch\nfor i in range(2):\n torch.cuda.synchronize()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "high",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 2
+        },
+        "end": {
+          "line": 3,
+          "column": 26
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S002",
+    "name": "shadow",
+    "source": "import torch\ndef f(torch):\n torch.cuda.synchronize()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S002",
+    "name": "local",
+    "source": "import torch\ndef f():\n torch.cuda.synchronize()\n torch=other\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S002",
+    "name": "event",
+    "source": "import torch\nevent.synchronize()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S002",
+    "name": "timing",
+    "source": "import torch\nstart=time.time()\ntorch.cuda.synchronize()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "line": 3,
+          "column": 25
+        }
+      }
+    ]
+  },
+  {
+    "rule": "S002",
+    "name": "string",
+    "source": "import torch\nmessage='torch.cuda.synchronize()'\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S002",
+    "name": "delete",
+    "source": "import torch\ndel torch\ntorch.cuda.synchronize()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "S002",
+    "name": "rebind",
+    "source": "import torch\ntorch=other\ntorch.cuda.synchronize()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "D001",
+    "name": "string",
+    "source": "import torch\ntorch.device('cuda:0')\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 14
+        },
+        "end": {
+          "line": 2,
+          "column": 22
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D001",
+    "name": "two_args",
+    "source": "import torch\ntorch.device('cuda',0)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 21
+        },
+        "end": {
+          "line": 2,
+          "column": 22
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D001",
+    "name": "cuda_method",
+    "source": "import torch\nx=torch.ones(1)\nx.cuda(0)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 8
+        },
+        "end": {
+          "line": 3,
+          "column": 9
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D001",
+    "name": "factory",
+    "source": "import torch\nx=torch.ones(1,device='cuda:1')\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 23
+        },
+        "end": {
+          "line": 2,
+          "column": 31
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D001",
+    "name": "constant",
+    "source": "import torch\nd='cuda:12'\nx=torch.ones(1,device=d)\ny=torch.ones(1,device=d)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 3
+        },
+        "end": {
+          "line": 2,
+          "column": 12
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D001",
+    "name": "plain_string",
+    "source": "import torch\nmessage='cuda:0'\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D001",
+    "name": "dynamic",
+    "source": "import torch\ntorch.device('cuda',rank)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D001",
+    "name": "negative",
+    "source": "import torch\ntorch.device('cuda',-1)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D001",
+    "name": "cpu",
+    "source": "import torch\ntorch.device('cpu')\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D001",
+    "name": "multidigit",
+    "source": "import torch\ntorch.device('cuda:123')\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 14
+        },
+        "end": {
+          "line": 2,
+          "column": 24
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D001",
+    "name": "shadow",
+    "source": "import torch\ndef f(torch):\n torch.device('cuda:0')\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D001",
+    "name": "unspecified",
+    "source": "import torch\ntorch.device('cuda')\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D002",
+    "name": "cuda",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.to('cuda:0').to('cuda:0')\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 3
+        },
+        "end": {
+          "line": 3,
+          "column": 30
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D002",
+    "name": "cpu",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cpu().cpu()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 3
+        },
+        "end": {
+          "line": 3,
+          "column": 16
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D002",
+    "name": "different",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.to('cuda:0').to('cuda:1')\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D002",
+    "name": "copy",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.to('cuda:0').to('cuda:0',copy=True)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D002",
+    "name": "dtype",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.to('cuda:0').to('cuda:0',dtype=torch.float64)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D002",
+    "name": "memory",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cpu().cpu(memory_format=torch.contiguous_format)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D002",
+    "name": "assignment",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.to('cuda:0')\nz=y.to('cuda:0')\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 3
+        },
+        "end": {
+          "line": 4,
+          "column": 17
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D002",
+    "name": "call",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cpu()\nconsume(y)\nz=y.cpu()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D002",
+    "name": "fake",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=other.cpu().cpu()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D002",
+    "name": "current",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.cuda().cuda()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "D002",
+    "name": "normalized",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\nd=torch.device('cuda',0)\ny=x.to(d).cuda(0)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "low",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 3
+        },
+        "end": {
+          "line": 4,
+          "column": 18
+        }
+      }
+    ]
+  },
+  {
+    "rule": "D002",
+    "name": "factory_once",
+    "source": "import torch\nx=torch.ones(1,device='cpu')\ny=x.to('cpu')\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "low",
+    "locations": []
+  },
+  {
+    "rule": "P001",
+    "name": "float64",
+    "source": "import torch\nx=torch.ones(1,dtype=torch.float64)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 3
+        },
+        "end": {
+          "line": 2,
+          "column": 36
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P001",
+    "name": "double_constant",
+    "source": "import torch\nx=torch.ones(1,dtype=torch.double)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 3
+        },
+        "end": {
+          "line": 2,
+          "column": 35
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P001",
+    "name": "method",
+    "source": "import torch\nx=torch.ones(1)\nx.double()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "line": 3,
+          "column": 11
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P001",
+    "name": "to_pos",
+    "source": "import torch\nx=torch.ones(1)\nx.to(torch.float64)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "line": 3,
+          "column": 20
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P001",
+    "name": "to_kw",
+    "source": "import torch\nx=torch.ones(1)\nx.to(dtype=torch.float64)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "line": 3,
+          "column": 26
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P001",
+    "name": "alias",
+    "source": "import torch\nfrom torch import float64 as fp\nx=torch.ones(1,dtype=fp)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 3
+        },
+        "end": {
+          "line": 3,
+          "column": 25
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P001",
+    "name": "local",
+    "source": "import torch\ndt=torch.float64\nx=torch.ones(1,dtype=dt)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 3,
+          "column": 3
+        },
+        "end": {
+          "line": 3,
+          "column": 25
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P001",
+    "name": "python",
+    "source": "import torch\nx=float(1)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P001",
+    "name": "numpy",
+    "source": "import torch\nx=np.ones(1,dtype=np.float64)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P001",
+    "name": "unknown",
+    "source": "import torch\nx.double()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P001",
+    "name": "cpu",
+    "source": "import torch\nx=torch.ones(1,device='cpu',dtype=torch.float64)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 2,
+          "column": 3
+        },
+        "end": {
+          "line": 2,
+          "column": 49
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P001",
+    "name": "implicit",
+    "source": "import torch\nx=torch.ones(1)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P002",
+    "name": "float",
+    "source": "import torch\nx=torch.ones(1)\nfor i in range(2):\n y=x.float()\n",
+    "count": 1,
+    "confidence": "medium",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 13
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P002",
+    "name": "half",
+    "source": "import torch\nx=torch.ones(1)\nfor i in range(2):\n y=x.half()\n",
+    "count": 1,
+    "confidence": "medium",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 12
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P002",
+    "name": "double",
+    "source": "import torch\nx=torch.ones(1)\nfor i in range(2):\n y=x.double()\n",
+    "count": 1,
+    "confidence": "medium",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 14
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P002",
+    "name": "bfloat16",
+    "source": "import torch\nx=torch.ones(1)\nfor i in range(2):\n y=x.bfloat16()\n",
+    "count": 1,
+    "confidence": "medium",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 16
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P002",
+    "name": "to",
+    "source": "import torch\nx=torch.ones(1,dtype=torch.float64)\nfor i in range(2):\n y=x.to(torch.float32)\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 23
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P002",
+    "name": "same",
+    "source": "import torch\nx=torch.ones(1,dtype=torch.float32)\nfor i in range(2):\n y=x.float()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P002",
+    "name": "different",
+    "source": "import torch\nx=torch.ones(1,dtype=torch.float64)\nfor i in range(2):\n y=x.float()\n",
+    "count": 1,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": [
+      {
+        "path": "case.py",
+        "start": {
+          "line": 4,
+          "column": 4
+        },
+        "end": {
+          "line": 4,
+          "column": 13
+        }
+      }
+    ]
+  },
+  {
+    "rule": "P002",
+    "name": "device_only",
+    "source": "import torch\nx=torch.ones(1)\nfor i in range(2):\n y=x.cuda()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P002",
+    "name": "dynamic",
+    "source": "import torch\nx=torch.ones(1)\nfor i in range(2):\n y=x.to(dtype=dt)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P002",
+    "name": "unknown",
+    "source": "import torch\nfor i in range(2):\n y=x.float()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P002",
+    "name": "outside",
+    "source": "import torch\nx=torch.ones(1)\ny=x.float()\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  },
+  {
+    "rule": "P002",
+    "name": "copy_same",
+    "source": "import torch\nx=torch.ones(1,dtype=torch.float32)\nfor i in range(2):\n y=x.to(dtype=torch.float32,copy=True)\n",
+    "count": 0,
+    "confidence": "high",
+    "severity": "medium",
+    "locations": []
+  }
+]

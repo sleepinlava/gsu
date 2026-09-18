@@ -1,0 +1,12 @@
+[
+  {"file":"inference_logging.py","expected_rules":["S003"],"review":"Annotated Tensor followed through cuda and mean; read remains medium confidence. Device transfer T001 remains a separate stable finding."},
+  {"file":"allocator_cleanup.py","expected_rules":["M001"],"review":"Cache clearing may serve other applications or fragmentation; no unconditional removal advice."},
+  {"file":"repeated_leaf_copy.py","expected_rules":["M002"],"review":"Independent leaf copies may be intentional. Replacing with shared storage is not a safe automatic fix."},
+  {"file":"collect_predictions.py","expected_rules":["M003"],"review":"Direct accumulation recurrence; prediction type and size are not inferred and complexity is not claimed."},
+  {"file":"retained_graph.py","expected_rules":["A001"],"review":"Repeated backward may require retention; review preserves this legitimate use."},
+  {"file":"debugging.py","expected_rules":["A002"],"review":"Deliberately enabled debugging still reports a performance review, not a correctness error."},
+  {"file":"higher_order.py","expected_rules":[],"review":"Explicit higher-order differentiation excludes graph-retention advice."},
+  {"file":"cpu_postprocessing.py","expected_rules":[],"review":"CPU facts survive mean; no CUDA synchronization claim."},
+  {"file":"cuda_filtering.py","expected_rules":["S005"],"review":"CUDA nonzero synchronizes, but per-iteration indices may be required."},
+  {"file":"scalar_decision.py","expected_rules":["S004"],"review":"CUDA boolean decision may synchronize; removing it could change control flow."}
+]

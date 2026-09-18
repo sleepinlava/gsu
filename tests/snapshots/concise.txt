@@ -1,0 +1,2 @@
+case.py:4:5: S003 Tensor.tolist() inside a loop may transfer data to the CPU.
+Checked 1 file; found 1 diagnostic; 0 errors.

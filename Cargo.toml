@@ -1,0 +1,28 @@
+[package]
+name = "gsu"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.94"
+description = "Standalone, read-only PyTorch performance static checker"
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+rustpython-parser = { version = "=0.4.0", default-features = false, features = ["location", "num-bigint"] }
+rustpython-ast = { version = "=0.4.0", default-features = false, features = ["location", "num-bigint", "visitor"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+globset = "0.4"
+ignore = "0.4"
+pathdiff = "0.2"
+unicode-width = "0.2"
+libc = "0.2"
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+lto = "thin"
+strip = true

@@ -1,0 +1,165 @@
+[
+  {
+    "file": "training_batches.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Untyped DataLoader/model values cannot be confirmed as Tensors."
+  },
+  {
+    "file": "scientific_fp64.py",
+    "expected_rules": [
+      "P001"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Explicit FP64 is accurately identified; numerical requirements may justify it."
+  },
+  {
+    "file": "cpu_logging.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Known CPU scalar reads are excluded."
+  },
+  {
+    "file": "cuda_logging.py",
+    "expected_rules": [
+      "S001"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Review logging frequency while preserving requirements."
+  },
+  {
+    "file": "timed_inference.py",
+    "expected_rules": [
+      "S002",
+      "S002"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Both synchronizations are intentional timing boundaries; advice must remain conditional."
+  },
+  {
+    "file": "fixed_device.py",
+    "expected_rules": [
+      "D001"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Fixed device configuration is a portability review, not an inherent performance defect."
+  },
+  {
+    "file": "rank_device.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Dynamic rank is not a hardcoded index."
+  },
+  {
+    "file": "explicit_batch_transfer.py",
+    "expected_rules": [
+      "T001"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Visible repeated transfer; necessity remains a user decision."
+  },
+  {
+    "file": "precision_prepared.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Same known dtype conversion is excluded."
+  },
+  {
+    "file": "precision_per_batch.py",
+    "expected_rules": [
+      "P002"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Potential per-iteration conversion; numerical behavior requires validation."
+  },
+  {
+    "file": "device_roundtrip.py",
+    "expected_rules": [
+      "T002"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Visible unconsumed CPU/CUDA round trip."
+  },
+  {
+    "file": "consumed_intermediate.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "The intermediate Tensor is consumed, so no round-trip claim."
+  },
+  {
+    "file": "defensive_cpu_boundary.py",
+    "expected_rules": [
+      "D002"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Equivalent repeated CPU conversion; may be a defensive boundary."
+  },
+  {
+    "file": "unknown_custom_object.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Custom methods must not be classified as Tensor methods."
+  },
+  {
+    "file": "shadowed_import.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Parameter shadows the torch import."
+  },
+  {
+    "file": "annotated_helper.py",
+    "expected_rules": [
+      "T001"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Annotation provides Tensor evidence only; device and cost remain unknown."
+  },
+  {
+    "file": "comprehension_metrics.py",
+    "expected_rules": [
+      "S001"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Comprehension body is a repeated context."
+  },
+  {
+    "file": "deferred_callback.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Defining a callback in a loop does not prove repeated execution."
+  },
+  {
+    "file": "aliased_synchronization.py",
+    "expected_rules": [
+      "S002"
+    ],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Alias resolves to explicit synchronization in a repeated context."
+  },
+  {
+    "file": "plain_device_message.py",
+    "expected_rules": [],
+    "license": "MIT (original GSU fixture)",
+    "accurately_describes_static_pattern": true,
+    "review": "Ordinary strings are not scanned as device usage."
+  }
+]

@@ -1,0 +1,10 @@
+S003 Tensor.tolist() inside a loop may transfer data to the CPU.
+  --> case.py:4:5
+   |
+ 4 |     x.tolist()
+   |     ^^^^^^^^^^
+   |
+   = help: Review whether conversion can be performed less frequently.
+   = severity: medium; confidence: high; preview
+
+Checked 1 file; found 1 diagnostic; 0 errors.

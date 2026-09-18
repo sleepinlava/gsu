@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-14, windows-2022]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install pinned Rust
+        run: rustup toolchain install 1.94.0 --profile minimal --component rustfmt,clippy
+      - run: cargo fmt --check
+      - run: cargo clippy --locked --all-targets -- -D warnings
+      - run: cargo test --locked
+      - run: cargo build --release --locked
+      - name: Schema and fuzz smoke (development Python only)
+        if: runner.os == 'Linux'
+        run: |
+          python3 -m pip install jsonschema==4.26.0
+          python3 scripts/validate_schema.py target/release/gsu
+          python3 scripts/fuzz_smoke.py target/release/gsu
+      - name: Standalone version smoke
+        run: ./target/release/gsu --version
