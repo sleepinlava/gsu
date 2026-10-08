@@ -1,0 +1,6 @@
+- id: gsu
+  name: gsu
+  description: Static PyTorch performance checks (requires gsu on PATH, e.g. pip install gsu)
+  entry: gsu check
+  language: system
+  pass_filenames: false

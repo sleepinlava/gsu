@@ -23,6 +23,34 @@ To install the binary on your PATH: `cargo install --path . --locked`. The resul
 
 The repository includes `examples/train.py`; checking it intentionally returns 1. All suggestions require human review and validation of correctness, numerical behavior, and actual performance. Findings are static evidence, not measurements or guaranteed speedups.
 
+## Install and integrate
+
+> The PyPI package and pre-commit/GitHub integrations below are prepared but not yet published; until the first publish, use `cargo install --path . --locked`.
+
+```sh
+pip install gsu        # platform wheel with the standalone binary; no Rust needed
+gsu check .
+```
+
+pre-commit (requires `gsu` on PATH, e.g. via the pip package):
+
+```yaml
+- repo: https://github.com/sleepinlava/gsu
+  rev: v0.2.0
+  hooks:
+    - id: gsu
+```
+
+GitHub Actions:
+
+```yaml
+- uses: sleepinlava/gsu@v0.2.0
+  with:
+    args: check . --preview
+```
+
+The action runs the PyPI wheel via pipx. Diagnostics return exit code 1, so the hook or job fails when findings exist.
+
 ## Rules
 
 | Rule | Name | What to review |

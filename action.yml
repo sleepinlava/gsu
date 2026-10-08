@@ -1,0 +1,25 @@
+name: gsu
+description: Run gsu static PyTorch performance checks
+inputs:
+  args:
+    description: Arguments passed to gsu
+    required: false
+    default: check .
+  version:
+    description: gsu version to run; empty means the latest published on PyPI
+    required: false
+    default: ''
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        GSU_VERSION: ${{ inputs.version }}
+        GSU_ARGS: ${{ inputs.args }}
+      run: |
+        # intentional word splitting: GSU_ARGS is a user-provided argument line
+        if [ -n "$GSU_VERSION" ]; then
+          pipx run --spec "gsu==$GSU_VERSION" gsu $GSU_ARGS
+        else
+          pipx run gsu $GSU_ARGS
+        fi

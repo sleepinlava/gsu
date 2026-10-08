@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gsu"
+version = "0.2.0"
+description = "Standalone, read-only PyTorch performance static checker"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["pytorch", "static-analysis", "performance"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+]
+
+[project.urls]
+Homepage = "https://github.com/sleepinlava/gsu"
+
+[project.scripts]
+gsu = "gsu.__main__:main"
