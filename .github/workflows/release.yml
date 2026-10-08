@@ -11,8 +11,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-22.04
-            target: x86_64-unknown-linux-gnu
           - os: macos-14
             target: aarch64-apple-darwin
           - os: windows-2022
@@ -32,4 +30,43 @@ jobs:
           path: |
             ${{ steps.package.outputs.archive }}
             ${{ steps.package.outputs.checksum }}
+          if-no-files-found: error
+  package-linux:
+    # Built in manylinux_2_28 so the Linux wheel can carry a portable manylinux tag.
+    runs-on: ubuntu-22.04
+    container: quay.io/pypa/manylinux_2_28_x86_64
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install pinned Rust
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain 1.94.0 --profile minimal
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+      - run: cargo test --locked
+      - run: cargo build --release --locked
+      - name: Package candidate (does not publish a release)
+        id: package
+        run: python3 scripts/package.py x86_64-unknown-linux-gnu
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: gsu-x86_64-unknown-linux-gnu
+          path: |
+            ${{ steps.package.outputs.archive }}
+            ${{ steps.package.outputs.checksum }}
+          if-no-files-found: error
+  wheels:
+    needs: [package, package-linux]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: gsu-*
+          path: dist
+          merge-multiple: true
+      - run: python3 scripts/build_wheels.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: gsu-wheels
+          path: dist/wheels/
           if-no-files-found: error
