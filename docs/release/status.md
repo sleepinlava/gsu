@@ -35,7 +35,8 @@ Neither time nor observed memory regressed beyond the 15% review threshold. Raw 
 - 2026-10-08: dependency audit (`cargo audit`, 1294 advisories against Cargo.lock) found **zero vulnerabilities**; the only warnings are six unmaintained `unic-*` 0.9.0 crates pulled in transitively by `rustpython-parser =0.4.0`, with no known security impact and no maintained drop-in replacement in the pinned parser line.
 - 2026-10-08: CI run 37772781939 passed on **ubuntu-22.04, macos-14 and windows-2022** (fmt, strict clippy, tests, release build, schema validation and fuzz smoke on Linux). The prior Windows snapshot failure was a checkout line-ending issue, fixed by forcing LF for `tests/snapshots/` in `.gitattributes`.
 - Actual clean-machine package checks, portable Linux glibc baseline, independent rule/real-world review, extended fuzzing, remaining license review, signing and maintainer acceptance remain open as in the v0.1 release record.
-- The binary was built locally on glibc 2.44 and is not advertised as a portable Linux baseline build. No new cross-platform or Python grammar conformance claim is made.
+- 2026-10-08: the release workflow now builds the Linux binary in a `manylinux_2_28` container (glibc 2.28 baseline) and assembles three platform wheels (`manylinux_2_28_x86_64`, `macosx_14_0_arm64`, `win_amd64`) as artifacts; the CI-built manylinux wheel was installed into a clean local venv and passed `gsu --version` plus an intentional-finding `check` smoke. Workflow run 37775746662.
+- The locally built binary was built on glibc 2.44; use the CI manylinux artifact as the portable Linux baseline. No new cross-platform or Python grammar conformance claim is made.
 
 ## Reproduce
 

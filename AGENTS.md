@@ -172,10 +172,12 @@ python3 scripts/notices.py                              # regenerates THIRD_PART
   windows-2022: fmt, strict clippy, tests, release build; Linux additionally runs schema
   validation and fuzz smoke; all jobs smoke-test `--version`.
 - `.github/workflows/release.yml` — manual/tag-triggered candidate packaging via
-  `scripts/package.py` for three targets (x86_64 Linux, aarch64 macOS, x86_64 Windows);
-  uploads archives + checksums as artifacts only — it does **not** publish a release.
-  The script derives the version from `Cargo.toml` and rejects a binary version
-  mismatch.
+  `scripts/package.py` for three targets (aarch64 macOS and x86_64 Windows on their
+  runners; x86_64 Linux inside a `manylinux_2_28` container for a portable glibc
+  baseline). A `wheels` job then repacks the archives into platform wheels via
+  `scripts/build_wheels.py`. It uploads archives + checksums + wheels as artifacts
+  only — it does **not** publish a release or upload to PyPI. `scripts/package.py`
+  derives the version from `Cargo.toml` and rejects a binary version mismatch.
 - Prebuilt archives live in `dist/`; release acceptance status lives in
   `docs/release/status.md`.
 - Distribution entry points at the repo root: `.pre-commit-hooks.yaml` (`language:
